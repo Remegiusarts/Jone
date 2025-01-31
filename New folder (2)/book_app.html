@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Flexbox for Name Fields (First Name and Last Name side by side) */
+        .name-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .name-row input {
+            flex: 1;
+        }
+
+        /* Flexbox for Doctor and Specialty Fields (side by side) */
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .input-row input, .input-row select {
+            flex: 1;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #confirmation-message {
+            text-align: center;
+            margin-top: 20px;
+            background-color: #e9f7e9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #c3e6cb;
+        }
+
+        #doctor-availability {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #doctor-availability.available {
+            color: green;
+        }
+
+        #doctor-availability.unavailable {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Book an Appointment</h1>
+
+        <form id="appointment-form">
+            <!-- Patient Information -->
+            <div class="name-row">
+                <div>
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div>
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+            </div>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Doctor and Specialty in a single row -->
+            <div class="input-row">
+                <div>
+                    <label for="specialty">Select Specialty:</label>
+                    <select id="specialty" name="specialty" required>
+                        <option value="">Select Specialty</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="doctor">Select Doctor:</label>
+                    <select id="doctor" name="doctor" required disabled>
+                        <option value="">Select Doctor</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Appointment Information -->
+            <label for="date">Appointment Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Appointment Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <!-- Doctor Availability -->
+            <div id="doctor-availability" class="hidden"></div>
+
+            <button type="submit">Book Appointment</button>
+        </form>
+
+        <div id="confirmation-message" class="hidden">
+            <h2>Your appointment has been booked successfully!</h2>
+            <p id="appointment-details"></p>
+        </div>
+    </div>
+
+    <script>
+        const doctors = {
+            'Cardiology': [
+                { name: 'Dr. John Smith', available: true },
+                { name: 'Dr. Mary Johnson', available: false },
+            ],
+            'Dermatology': [
+                { name: 'Dr. Alan Green', available: true },
+                { name: 'Dr. Sara White', available: true },
+            ],
+            'Orthopedics': [
+                { name: 'Dr. Michael Brown', available: true },
+                { name: 'Dr. Linda Blue', available: false },
+            ],
+            'Pediatrics': [
+                { name: 'Dr. Emma Taylor', available: true },
+                { name: 'Dr. Jacob Wilson', available: true },
+            ],
+            'General': [
+                { name: 'Dr. Robert Lee', available: true },
+                { name: 'Dr. Karen Scott', available: true },
+            ]
+        };
+
+        // Populate doctor list based on selected specialty
+        document.getElementById('specialty').addEventListener('change', function() {
+            const specialty = this.value;
+            const doctorSelect = document.getElementById('doctor');
+            const doctorAvailability = document.getElementById('doctor-availability');
+
+            // Clear previous doctor options and availability message
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+            doctorAvailability.classList.add('hidden');
+            
+            if (specialty) {
+                const availableDoctors = doctors[specialty];
+                availableDoctors.forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor.name;
+                    option.textContent = doctor.name;
+                    doctorSelect.appendChild(option);
+                });
+                doctorSelect.disabled = false;
+            } else {
+                doctorSelect.disabled = true;
+            }
+        });
+
+        // Show doctor availability when a doctor is selected
+        document.getElementById('doctor').addEventListener('change', function() {
+            const selectedDoctor = this.value;
+            const specialty = document.getElementById('specialty').value;
+            const doctorAvailability = document.getElementById('doctor-availability');
+
+            if (selectedDoctor && specialty) {
+                const doctor = doctors[specialty].find(d => d.name === selectedDoctor);
+                if (doctor) {
+                    if (doctor.available) {
+                        doctorAvailability.textContent = `${selectedDoctor} is available for appointments.`;
+                        doctorAvailability.classList.remove('unavailable');
+                        doctorAvailability.classList.add('available');
+                    } else {
+                        doctorAvailability.textContent = `${selectedDoctor} is currently unavailable.`;
+                        doctorAvailability.classList.remove('available');
+                        doctorAvailability.classList.add('unavailable');
+                    }
+                    doctorAvailability.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const specialty = document.getElementById('specialty').value;
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+
+            // Format appointment details for confirmation
+            const appointmentDetails = `
+                <strong>Patient Name:</strong> ${firstName} ${lastName}<br>
+                <strong>Mobile Number:</strong> ${mobile}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Specialty:</strong> ${specialty}<br>
+                <strong>Doctor:</strong> ${doctor}<br>
+                <strong>Appointment Date:</strong> ${date}<br>
+                <strong>Appointment Time:</strong> ${time}
+            `;
+
+            // Show confirmation message
+            document.getElementById('confirmation-message').classList.remove('hidden');
+            document.getElementById('appointment-details').innerHTML = appointmentDetails;
+
+            // Optionally, reset the form after submission
+            document.getElementById('appointment-form').reset();
+            document.getElementById('doctor').disabled = true;
+            document.getElementById('doctor-availability').classList.add('hidden');
+        });
+    </script>
+
+</body>
+</html>

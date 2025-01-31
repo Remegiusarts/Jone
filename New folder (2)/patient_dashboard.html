@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Patient Dashboard</title>
+    <style>
+        /* Basic Styling for the Page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #dashboard {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #logoutBtn {
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #logoutBtn:hover {
+            background-color: #e53935;
+        }
+
+        .dashboard-section {
+            margin-top: 20px;
+        }
+
+        .dashboard-section h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .dashboard-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .dashboard-section ul li {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Patient Dashboard -->
+    <div id="dashboard">
+        <h2>Welcome, <span id="patientName">Patient</span>!</h2>
+        <button id="logoutBtn">Logout</button>
+
+        <!-- Patient Dashboard Content -->
+        <div class="dashboard-section">
+            <h3>Your Personal Information:</h3>
+            <p id="patientInfo"></p>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Your Appointments:</h3>
+            <ul id="appointmentsList">
+                <!-- Appointment items will be injected here -->
+            </ul>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Your Medical History:</h3>
+            <ul id="medicalHistoryList">
+                <!-- Medical History items will be injected here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Sample patient data
+        const patientData = {
+            name: 'John Doe',
+            age: 29,
+            bloodType: 'O+',
+            lastCheckup: '12/12/2024',
+            appointments: [
+                { date: '02/15/2025', time: '10:00 AM', doctor: 'Dr. Smith' },
+                { date: '03/01/2025', time: '02:00 PM', doctor: 'Dr. Johnson' }
+            ],
+            medicalHistory: [
+                { year: '2024', condition: 'Annual Physical Exam' },
+                { year: '2023', condition: 'Routine Blood Test' }
+            ]
+        };
+
+        // Accessing the HTML elements
+        const dashboard = document.getElementById('dashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Display patient information
+        document.getElementById('patientName').innerText = patientData.name;
+        document.getElementById('patientInfo').innerText = `Age: ${patientData.age}, Blood Type: ${patientData.bloodType}, Last Checkup: ${patientData.lastCheckup}`;
+
+        // Display appointments
+        const appointmentsList = document.getElementById('appointmentsList');
+        patientData.appointments.forEach(function(appointment) {
+            const li = document.createElement('li');
+            li.innerText = `Date: ${appointment.date}, Time: ${appointment.time}, Doctor: ${appointment.doctor}`;
+            appointmentsList.appendChild(li);
+        });
+
+        // Display medical history
+        const medicalHistoryList = document.getElementById('medicalHistoryList');
+        patientData.medicalHistory.forEach(function(history) {
+            const li = document.createElement('li');
+            li.innerText = `Year: ${history.year}, Condition: ${history.condition}`;
+            medicalHistoryList.appendChild(li);
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', function() {
+            alert('Logged out successfully');
+            // Here you can redirect to a login page or handle logout logic
+            window.location.href = 'index.html';  // Example: redirect to a login page
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Medical</title>
+	<meta name="description" content="">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- <link rel="shortcut icon" href="img/favicon.png"> -->
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
+	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
+
+	<!-- Font Awesome CSS-->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Normalize/Reset CSS-->
+	<link rel="stylesheet" href="css/normalize.min.css">
+	<!-- Main CSS-->
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body id="welcome">
+<style>
+	/* Style for the button */
+.login-button {
+  background-color: #4CAF50; /* Green background */
+  border: none;              /* Remove default button border */
+  padding: 10px 20px;        /* Padding to give some space around the text */
+  text-align: center;        /* Center align text inside the button */
+  border-radius: 8px;        /* Rounded corners */
+  cursor: pointer;          /* Change cursor to pointer on hover */
+  font-size: 16px;           /* Text size */
+  display: inline-block;     /* Make the button inline */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effect */
+}
+
+/* Remove default link styling */
+.login-button a {
+  text-decoration: none;     /* Remove underline */
+  color: white;              /* White text color */
+  font-weight: bold;         /* Make the text bold */
+}
+
+/* Hover effect for the button */
+.login-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05);     /* Slightly grow the button on hover */
+}
+
+/* Active effect for the button */
+.login-button:active {
+  background-color: #3e8e41; /* Even darker green when clicked */
+  transform: scale(0.98);     /* Shrink the button slightly when clicked */
+}
+
+body{
+	background-color:#FFF;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+	font-size:16px;
+	line-height:18px;
+	color:#777;
+}
+
+p{
+	margin:0;
+}
+
+a {
+    color: #aa0a5f;
+}
+
+a, a:hover, a:focus{
+	text-decoration: none;
+	outline: 0;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    color: #333;
+	margin:0;
+    font-weight: normal;
+}
+
+h1 { font-size: 20px;}
+h2 { font-size: 24px;}
+h3 { font-size: 18px;}
+h5 { font-size: 16px;}
+h6 { font-size: 14px;}
+
+strong {
+  letter-spacing: 1px;
+}
+
+code {
+  background-color: #ddd;
+  border-radius: 3px;
+  color: #000;
+  font-size: 85%;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+code a {
+    color: #333;
+}
+
+code a:hover {
+    text-decoration: underline;
+}
+
+section p {
+  line-height: 28px;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+.tan {
+  margin-bottom: 10px;
+}
+
+.fifteen{
+    margin-bottom: 15px;
+}
+
+.twenty{
+    margin-bottom: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.title {
+    margin: 50px 0 30px;
+}
+
+.syntaxhighlighter {
+    border: 1px solid #efefef;
+    max-height: 100% !important;
+    padding: 20px 0;
+}
+
+
+.main-content section {
+  margin: 0 5%;
+}
+
+
+.left-sidebar {
+    background-color: #ab7636;
+    float: left;
+    min-height: 100%;
+    position: fixed;
+    width: 18%;
+}
+
+.logo {
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-top: 70px;
+}
+.logo h1{
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.left-nav ul {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.left-nav ul li a {
+    color: #fff;
+    display: block;
+    padding: 10px 35px;
+    -webkit-transition: all 0.3s ease-in 0s;
+       -moz-transition: all 0.3s ease-in 0s;
+        -ms-transition: all 0.3s ease-in 0s;
+         -o-transition: all 0.3s ease-in 0s;
+            transition: all 0.3s ease-in 0s;
+}
+
+.left-nav ul li a:hover, .left-nav ul li .current {
+    background-color: #fff;
+    color: #000;
+}
+
+
+#main-wrapper {
+    float: left;
+    margin-left: 18%;
+    width: 82%;
+}
+
+.content-header {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    margin-top: 30px;
+    padding: 30px 0 35px;
+    text-align: center;
+}
+
+.welcome {
+    font-size: 16px;
+    line-height: 26px;
+    margin: 35px auto 0;
+}
+
+.features {
+    margin-top: 50px;
+}
+
+.features ul li {
+    list-style: square outside none;
+    margin-bottom: 15px;
+}
+
+.features > ul {
+    padding-left: 18px;
+}
+
+.author {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+    padding: 30px 0;
+}
+
+.author-info {
+    font-size: 18px;
+    line-height: 28px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.section-content {
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.section-content li {
+    margin-bottom: 15px;
+}
+
+.section-content a:hover {
+    text-decoration: underline;
+}
+
+.script-source li {
+    list-style: square outside none;
+    margin-bottom: 10px;
+}
+
+#twitter-feed li,
+#flickr li {
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+
+#twitter-feed img {
+    border: 1px solid #ddd;
+    box-shadow: 2px 3px 3px #ddd;
+    height: auto;
+    margin-top: 10px;
+    max-width: 100%;
+}
+.section-content
+{
+height: 100%;
+width: 100%;
+}
+
+</style>
+
+
+	<aside class="left-sidebar">
+		<div class="logo">
+			<a href="#welcome">
+				<h1>Dashboard</h1>
+			</a>
+		</div>
+		<nav class="left-nav">
+			<ul id="nav">
+				<li class="current"><a href="#About Us">About Us</a></li>
+				<li><a href="#Admin login">Admin login</a></li>
+				<li><a href="#Doctor login">Doctor login</a></li>
+				<li><a href="#Patient login">Patient login</a></li>
+				<li><a href="#Emergency">Emergency</a></li>
+				<li><a href="#Book Appointment">Book Appointment</a></li>
+				<li><a href="#video">Video Tutorial</a></li>
+				<li><a href="#Feedback">Feedback</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="main-wrapper">
+		<div class="main-content">
+			<section id="About Us">
+				<div class="content-header">
+					<h1 style="font-size: 48px; font-family: 'Arial', sans-serif; font-weight: bold; color: #333; text-align: center; text-transform: uppercase; margin-top: 50px; letter-spacing: 2px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
+						Hitler Hospital
+					  </h1>
+					  
+</div>
+				<div class="welcome">
+					<h2 class="twenty">Welcome To Medical</h2>
+
+					<p>Firstly, a huge thanks for purchasing this theme, your support is truly appreciated!</p>
+
+					<p>This document covers the installation and use of this theme and often reveals answers to common problems and issues - read this document thoroughly if you are experiencing any difficulties. If you have any questions that are beyond the scope of this document. Thank you so much!</p>
+				</div>
+			</section>
+			<section id="Admin login">
+				<button class="login-button"><a href="login_admin.html" >LOGIN</a></button>
+
+
+			</section>
+
+
+			<section id="Doctor login">
+				<button class="login-button"><a href="login_doctor.html" >LOGIN</a></button>
+
+			
+						</section>
+					</main>
+
+					<footer class="footer">
+
+					</footer>
+				</pre>
+			</section>
+
+
+			<section id="Patient login">
+				<button class="login-button"><a href="login_patient.html" >LOGIN</a></button>
+
+			</section>
+				<section id="Emergency">
+					<h2 class="title">Emergency</h2>
+
+					<p class="fifteen">emergency service<strong>Body Section</strong>.
+
+						
+
+          </section>
+	  <section id="Book Appointment">
+		<h2 class="title"> Book Appointment </h2>
+		<a href="book_app.html"  style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px;">
+			BOOk APPOINTMENT
+		</a>
+		   
+</section>
+<section id="video">
+    <h2 class="title"> Video Tutorial </h2>
+    <!-- 21:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-21by9">
+        <iframe class="embed-responsive-item" width="100%" height="515" src="https://www.youtube.com/embed/i7_PRPLOxVE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+    </div>	            
+</section>
+<section id="Feedback">
+	<h2 class="title">Feedback </h2>
+	<p>Replace this action with your own mailchimp post URL. Don't remove the "". Just paste the url inside "".</p>
+	<pre class="brush: javascript">
+		<div id="mc_embed_signup">
+			//Replace this action with your own mailchimp post URL. Don't remove the "". Just paste the url inside "".
+			<form target="_blank" novalidate action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&id=92a4423d01" method="get" class="subscription relative d-flex justify-content-center"></form>
+		</div>
+	</pre>		            
+</section>
+      
+  </div>
+</div>
+
+
+		<!-- Essential JavaScript Libraries
+			==============================================-->
+			<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+			<script type="text/javascript" src="js/jquery.nav.js"></script>
+			<script type="text/javascript" src="syntax-highlighter/scripts/shCore.js"></script> 
+			<script type="text/javascript" src="syntax-highlighter/scripts/shBrushXml.js"></script> 
+			<script type="text/javascript" src="syntax-highlighter/scripts/shBrushCss.js"></script> 
+			<script type="text/javascript" src="syntax-highlighter/scripts/shBrushJScript.js"></script> 
+			<script type="text/javascript" src="syntax-highlighter/scripts/shBrushPhp.js"></script> 
+			<script type="text/javascript">
+				SyntaxHighlighter.all()
+			</script>
+			
+			<script type="text/javascript" src="js/custom.js"></script>
+
+            
+		</body>
+		</html>
